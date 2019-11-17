@@ -20,9 +20,14 @@ export default {
   data() {
     return {}
   },
+  computed: {
+    frequency() {
+      return 440 * 2 ** ((this.keyNum - 9) / 12)
+    }
+  },
   methods: {
     toneTest() {
-      synth.triggerAttackRelease('C4', '8n')
+      synth.triggerAttackRelease(this.frequency, '8n')
     }
   }
 }

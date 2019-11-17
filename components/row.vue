@@ -5,6 +5,7 @@
 </template>
 
 <script>
+import * as math from '../plugins/math'
 import Key from './key'
 export default {
   name: 'Row',
@@ -18,7 +19,7 @@ export default {
     },
     length: {
       type: Number,
-      default: 5
+      default: 12
     }
   },
   data() {
@@ -26,18 +27,13 @@ export default {
   },
   computed: {
     keyNumArray() {
-      let keyNum = 0
-      return [...Array(this.length).keys()].map((i) => {
-        if (i === 0) {
-          return keyNum
-        } else if (i % 2 === 1) {
-          keyNum = keyNum + 4
-          return keyNum
-        } else {
-          keyNum = keyNum + 3
-          return keyNum
-        }
-      })
+      return [...Array(this.length).keys()].map(
+        (i) =>
+          7 * math.quotient(i, 2) +
+          4 * math.mod(i, 2) -
+          3 * math.quotient(this.rowNum, 2) -
+          2 * math.mod(this.rowNum, 2)
+      )
     }
   }
 }

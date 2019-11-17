@@ -1,6 +1,11 @@
 <template>
   <v-layout column justify-center align-center>
-    <row :rowNum="0" :length="5"></row>
+    <row
+      v-for="rowNum in rows"
+      :key="rowNum"
+      :rowNum="rowNum"
+      :length="12"
+    ></row>
   </v-layout>
 </template>
 
@@ -13,6 +18,11 @@ export default {
   },
   data() {
     return {}
+  },
+  computed: {
+    rows() {
+      return [...Array(12).keys()]
+    }
   }
 }
 </script>
