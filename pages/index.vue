@@ -1,16 +1,16 @@
 <template>
   <v-layout column justify-center align-center>
-    <key :synth="synth"></key>
+    <row :rowNum="0" :length="5"></row>
   </v-layout>
 </template>
 
 <script>
 import Tone from 'tone'
-import Key from '../components/key'
+import Row from '../components/row'
 export default {
   name: 'Index',
   components: {
-    Key
+    Row
   },
   data() {
     return {

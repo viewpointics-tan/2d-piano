@@ -1,13 +1,19 @@
 <template>
-  <v-card @touchstart.prevent="toneTest()" @mousedown="toneTest()">test</v-card>
+  <v-card
+    class="key"
+    @touchstart.prevent="toneTest()"
+    @mousedown="toneTest()"
+    >{{ keyNum }}</v-card
+  >
 </template>
 
 <script>
 export default {
   name: 'Key',
   props: {
-    synth: {
-      type: Object
+    keyNum: {
+      type: Number,
+      default: 0
     }
   },
   data() {
@@ -21,4 +27,9 @@ export default {
 }
 </script>
 
-<style></style>
+<style>
+.key {
+  width: 100px;
+  height: 50px;
+}
+</style>
