@@ -1,6 +1,7 @@
 <template>
-  <v-row class="d-flex flex-nowrap">
+  <v-row class="d-flex flex-nowrap justify-end">
     <key v-for="keyNum in keyNumArray" :key="keyNum" :keyNum="keyNum"></key>
+    <div :style="{ width: rowNum * 50 + 'px' }"></div>
   </v-row>
 </template>
 
