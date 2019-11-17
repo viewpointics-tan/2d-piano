@@ -1,5 +1,5 @@
 <template>
-  <v-card @mousedown="toneTest()">test</v-card>
+  <v-card @touchstart.prevent="toneTest()" @mousedown="toneTest()">test</v-card>
 </template>
 
 <script>
