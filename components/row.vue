@@ -1,6 +1,11 @@
 <template>
   <v-row class="d-flex flex-nowrap justify-end">
-    <key v-for="keyNum in keyNumArray" :key="keyNum" :keyNum="keyNum"></key>
+    <key
+      v-for="obj in keyNumArray"
+      :key="obj.keyNum"
+      :keyNum="obj.keyNum"
+      :keyColor="obj.color"
+    ></key>
     <div :style="{ width: rowNum * 50 + 'px' }"></div>
   </v-row>
 </template>
@@ -28,13 +33,19 @@ export default {
   },
   computed: {
     keyNumArray() {
-      return [...Array(this.length).keys()].map(
-        (i) =>
-          7 * math.quotient(i, 2) +
-          4 * math.mod(i, 2) -
-          3 * math.quotient(this.rowNum, 2) -
-          2 * math.mod(this.rowNum, 2)
-      )
+      return [...Array(this.length).keys()].map((i) => {
+        return {
+          keyNum:
+            7 * math.quotient(i, 2) +
+            (4 - math.mod(this.rowNum, 2)) * math.mod(i, 2) -
+            3 * math.quotient(this.rowNum, 2) -
+            1 * math.mod(this.rowNum, 2),
+          color:
+            (math.mod(i, 2) === 0) ^ (math.mod(this.rowNum, 2) === 0)
+              ? 'white'
+              : 'yellow'
+        }
+      })
     }
   }
 }
