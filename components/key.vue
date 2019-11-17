@@ -8,6 +8,7 @@
 </template>
 
 <script>
+import synth from '../plugins/synth'
 export default {
   name: 'Key',
   props: {
@@ -21,7 +22,7 @@ export default {
   },
   methods: {
     toneTest() {
-      this.synth.triggerAttackRelease('C4', '8n')
+      synth.triggerAttackRelease('C4', '8n')
     }
   }
 }

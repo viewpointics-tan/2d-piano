@@ -5,7 +5,6 @@
 </template>
 
 <script>
-import Tone from 'tone'
 import Row from '../components/row'
 export default {
   name: 'Index',
@@ -13,12 +12,7 @@ export default {
     Row
   },
   data() {
-    return {
-      synth: {}
-    }
-  },
-  mounted() {
-    this.synth = new Tone.Synth().toMaster()
+    return {}
   }
 }
 </script>
