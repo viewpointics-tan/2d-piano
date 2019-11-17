@@ -1,5 +1,5 @@
 <template>
-  <v-layout column justify-center align-center>
+  <v-layout column justify-center align-center class="parent">
     <div>
       <row
         v-for="rowNum in rowArray"
@@ -30,3 +30,8 @@ export default {
   }
 }
 </script>
+<style>
+.parent {
+  display: inline-block;
+}
+</style>
