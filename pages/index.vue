@@ -5,7 +5,7 @@
         v-for="rowNum in rowArray"
         :key="rowNum"
         :rowNum="rowNum"
-        :length="12"
+        :length="8"
       ></row>
     </div>
   </v-layout>
@@ -20,7 +20,7 @@ export default {
   },
   data() {
     return {
-      rows: 10
+      rows: 5
     }
   },
   computed: {

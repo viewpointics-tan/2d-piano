@@ -1,9 +1,11 @@
 <template>
   <v-card
-    @touchstart.prevent="toneTest()"
-    @mousedown="toneTest()"
-    class="key"
+    @touchstart.prevent="toneStart()"
+    @mousedown="toneStart()"
+    @touchend="toneEnd()"
+    @click="toneEnd()"
     :color="keyColor"
+    class="key"
     >{{ keyNum }}</v-card
   >
 </template>
@@ -25,17 +27,42 @@ export default {
   },
   data() {
     return {
-      synth: new Tone.Synth().toMaster()
+      filter: new Tone.Filter({
+        type: 'lowpass',
+        frequency: 350,
+        rolloff: -12,
+        Q: 1,
+        gain: 0
+      }).toMaster(),
+      synth: new Tone.Synth({ oscillator: { type: 'sawtooth' } }),
+      polysynth: new Tone.PolySynth(3, this.synth).toMaster()
     }
   },
   computed: {
     frequency() {
       return 440 * 2 ** ((this.keyNum - 9) / 12)
+    },
+    frequency2() {
+      return 440 * 2 ** ((this.keyNum - 9 + 0.05) / 12)
+    },
+    frequency3() {
+      return 440 * 2 ** ((this.keyNum - 9 - 0.05) / 12)
     }
   },
   methods: {
-    toneTest() {
-      this.synth.triggerAttackRelease(this.frequency, '8n')
+    toneStart() {
+      this.polysynth.triggerAttack([
+        this.frequency,
+        this.frequency2,
+        this.frequency3
+      ])
+    },
+    toneEnd() {
+      this.polysynth.triggerRelease([
+        this.frequency,
+        this.frequency2,
+        this.frequency3
+      ])
     }
   }
 }
