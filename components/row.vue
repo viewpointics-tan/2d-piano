@@ -26,6 +26,14 @@ export default {
     length: {
       type: Number,
       default: 12
+    },
+    xIndex: {
+      type: Number,
+      default: 0
+    },
+    yIndex: {
+      type: Number,
+      default: 0
     }
   },
   data() {
@@ -34,16 +42,16 @@ export default {
   computed: {
     keyNumArray() {
       return [...Array(this.length).keys()].map((i) => {
+        const x = i + this.xIndex
+        const y = this.rowNum + this.yIndex
         return {
           keyNum:
-            7 * math.quotient(i, 2) +
-            (4 - math.mod(this.rowNum, 2)) * math.mod(i, 2) -
-            3 * math.quotient(this.rowNum, 2) -
-            1 * math.mod(this.rowNum, 2),
+            7 * math.quotient(x, 2) +
+            (4 - math.mod(y, 2)) * math.mod(x, 2) -
+            3 * math.quotient(y, 2) -
+            1 * math.mod(y, 2),
           color:
-            (math.mod(i, 2) === 0) ^ (math.mod(this.rowNum, 2) === 0)
-              ? 'white'
-              : 'yellow'
+            (math.mod(x, 2) === 0) ^ (math.mod(y, 2) === 0) ? 'white' : 'yellow'
         }
       })
     }

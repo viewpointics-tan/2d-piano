@@ -34,7 +34,7 @@ export default {
         Q: 1,
         gain: 0
       }).toMaster(),
-      synth: new Tone.Synth({ oscillator: { type: 'sawtooth' } }),
+      synth: new Tone.Synth({ oscillator: { type: 'sine' } }),
       polysynth: new Tone.PolySynth(3, this.synth).toMaster()
     }
   },
