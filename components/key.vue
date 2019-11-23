@@ -6,13 +6,14 @@
     @click="toneEnd()"
     :color="keyColor"
     class="key"
-    >{{ keyNum }}</v-card
+    ><v-card-title>{{ keyName }}</v-card-title
+    ><v-card-subtitle>{{ keyNum }}</v-card-subtitle></v-card
   >
 </template>
 
 <script>
-// import synth from '../plugins/synth'
 import Tone from 'tone'
+import * as math from '../plugins/math'
 export default {
   name: 'Key',
   props: {
@@ -27,6 +28,20 @@ export default {
   },
   data() {
     return {
+      keyNames: [
+        'C',
+        'C#',
+        'D',
+        'D#',
+        'E',
+        'F',
+        'F#',
+        'G',
+        'G#',
+        'A',
+        'A#',
+        'B'
+      ],
       filter: new Tone.Filter({
         type: 'lowpass',
         frequency: 350,
@@ -41,11 +56,8 @@ export default {
     frequency() {
       return 440 * 2 ** ((this.keyNum - 9) / 12)
     },
-    frequency2() {
-      return 440 * 2 ** ((this.keyNum - 9 + 0.05) / 12)
-    },
-    frequency3() {
-      return 440 * 2 ** ((this.keyNum - 9 - 0.05) / 12)
+    keyName() {
+      return this.keyNames[math.mod(this.keyNum, 12)]
     }
   },
   mounted() {
