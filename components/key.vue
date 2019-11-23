@@ -34,8 +34,7 @@ export default {
         Q: 1,
         gain: 0
       }).toMaster(),
-      synth: new Tone.Synth({ oscillator: { type: 'sine' } }),
-      polysynth: new Tone.PolySynth(3, this.synth).toMaster()
+      synth: {}
     }
   },
   computed: {
@@ -49,20 +48,15 @@ export default {
       return 440 * 2 ** ((this.keyNum - 9 - 0.05) / 12)
     }
   },
+  mounted() {
+    this.synth = new Tone.Synth().toMaster()
+  },
   methods: {
     toneStart() {
-      this.polysynth.triggerAttack([
-        this.frequency,
-        this.frequency2,
-        this.frequency3
-      ])
+      this.synth.triggerAttack(this.frequency)
     },
     toneEnd() {
-      this.polysynth.triggerRelease([
-        this.frequency,
-        this.frequency2,
-        this.frequency3
-      ])
+      this.synth.triggerRelease()
     }
   }
 }
@@ -70,7 +64,7 @@ export default {
 
 <style>
 .key {
-  width: 100px;
-  height: 50px;
+  width: 100pt;
+  height: 50pt;
 }
 </style>

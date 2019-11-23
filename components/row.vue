@@ -6,7 +6,7 @@
       :keyNum="obj.keyNum"
       :keyColor="obj.color"
     ></key>
-    <div :style="{ width: rowNum * 50 + 'px' }"></div>
+    <div :style="{ width: rowNum * 50 + 'pt' }"></div>
   </v-row>
 </template>
 
