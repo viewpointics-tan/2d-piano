@@ -64,7 +64,7 @@ export default {
           color:
             (math.mod(x, 2) === 0) ^ (math.mod(y, 2) === 0)
               ? 'grey lighten-3'
-              : 'red accent-2'
+              : 'blue accent-2'
         }
       })
     }

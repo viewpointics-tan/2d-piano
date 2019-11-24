@@ -41,8 +41,8 @@ export default {
   data() {
     return {
       colorMap: {
-        'grey lighten-3': 'blue lighten-3',
-        'red accent-2': 'blue accent-2'
+        'grey lighten-3': 'red lighten-3',
+        'blue accent-2': 'red accent-2'
       },
       scaleMap: {
         a: [2, 9, 12, 16, 19],

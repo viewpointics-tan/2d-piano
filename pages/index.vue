@@ -8,8 +8,8 @@
       <v-btn @click="yIndex++">↑</v-btn>
       <v-btn @click="yIndex--">↓</v-btn>
       <div>
-        <v-btn @click="root++" color="blue accent-1">↑</v-btn>
-        <v-btn @click="root--" color="blue accent-1">↓</v-btn>
+        <v-btn @click="root++" color="red accent-1">↑</v-btn>
+        <v-btn @click="root--" color="red accent-1">↓</v-btn>
         <v-select v-model="scale" :items="scales"></v-select>
       </div>
     </div>
