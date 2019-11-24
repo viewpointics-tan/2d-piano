@@ -62,7 +62,9 @@ export default {
             3 * math.quotient(y, 2) -
             1 * math.mod(y, 2),
           color:
-            (math.mod(x, 2) === 0) ^ (math.mod(y, 2) === 0) ? 'white' : 'yellow'
+            (math.mod(x, 2) === 0) ^ (math.mod(y, 2) === 0)
+              ? 'grey lighten-3'
+              : 'red accent-2'
         }
       })
     }

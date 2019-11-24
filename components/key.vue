@@ -4,7 +4,7 @@
     @mousedown="toneStart()"
     @touchend="toneEnd()"
     @click="toneEnd()"
-    :color="assist ? 'green' : keyColor"
+    :color="assist ? colorMap[keyColor] : keyColor"
     class="key"
     ><v-card-title>{{ keyName }}</v-card-title
     ><v-card-subtitle>{{ keyNum }}</v-card-subtitle></v-card
@@ -40,6 +40,10 @@ export default {
   },
   data() {
     return {
+      colorMap: {
+        'grey lighten-3': 'blue lighten-3',
+        'red accent-2': 'blue accent-2'
+      },
       scaleMap: {
         a: [2, 9, 12, 16, 19],
         b: [5, 12, 16, 19, 23],
