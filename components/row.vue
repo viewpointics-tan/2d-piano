@@ -5,8 +5,11 @@
       :key="obj.keyNum"
       :keyNum="obj.keyNum"
       :keyColor="obj.color"
+      :rowNum="rowNum"
+      :root="root"
+      :scale="scale"
     ></key>
-    <div :style="{ width: rowNum * 50 + 'pt' }"></div>
+    <div :style="{ width: (rowNum - yIndex) * 50 + 'pt' }"></div>
   </v-row>
 </template>
 
@@ -34,6 +37,14 @@ export default {
     yIndex: {
       type: Number,
       default: 0
+    },
+    root: {
+      type: Number,
+      default: 0
+    },
+    scale: {
+      type: String,
+      default: 'a'
     }
   },
   data() {
@@ -43,7 +54,7 @@ export default {
     keyNumArray() {
       return [...Array(this.length).keys()].map((i) => {
         const x = i + this.xIndex
-        const y = this.rowNum + this.yIndex
+        const y = this.rowNum
         return {
           keyNum:
             7 * math.quotient(x, 2) +

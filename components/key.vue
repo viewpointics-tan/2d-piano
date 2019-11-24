@@ -4,7 +4,7 @@
     @mousedown="toneStart()"
     @touchend="toneEnd()"
     @click="toneEnd()"
-    :color="keyColor"
+    :color="assist ? 'green' : keyColor"
     class="key"
     ><v-card-title>{{ keyName }}</v-card-title
     ><v-card-subtitle>{{ keyNum }}</v-card-subtitle></v-card
@@ -24,10 +24,27 @@ export default {
     keyColor: {
       type: String,
       default: 'white'
+    },
+    rowNum: {
+      type: Number,
+      default: 0
+    },
+    root: {
+      type: Number,
+      default: 0
+    },
+    scale: {
+      type: String,
+      default: 'a'
     }
   },
   data() {
     return {
+      scaleMap: {
+        a: [2, 9, 12, 16, 19],
+        b: [5, 12, 16, 19, 23],
+        c: [6, 12, 16, 19, 23]
+      },
       keyNames: [
         'C',
         'C#',
@@ -58,6 +75,14 @@ export default {
     },
     keyName() {
       return this.keyNames[math.mod(this.keyNum, 12)]
+    },
+    assist() {
+      const isMember = this.scaleMap[this.scale].map(
+        (el) =>
+          math.mod(el, 24) ===
+          math.mod(7 * this.root + this.keyNum + 12 * (this.rowNum + 1), 24)
+      )
+      return isMember.reduce((acc, curr) => acc || curr, false)
     }
   },
   mounted() {
