@@ -38,6 +38,14 @@ const config = {
     //     tsx: 'never',
     //   },
     // ],
+    "no-use-before-define": "off",
+    "@typescript-eslint/no-use-before-define": ["error"],
+    "import/extensions":[
+      "error",
+      {
+        "tsx": "never"
+      }
+    ],
     'react/jsx-filename-extension': [
       'error',
       {
