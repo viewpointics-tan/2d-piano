@@ -9,13 +9,13 @@ const keyWidth = 40
 const App = (): JSX.Element => {
   const rows = [...Array(rowNumber).keys()].map((_, index) => (
     <Row
-      rowIndex={index}
+      rowIndex={rowNumber - 1 - index}
       rowLength={rowLength}
       keyHeight={keyHeight}
       keyWidth={keyWidth}
     />
   ))
-  return <div className="bg-red-300 flex flex-col w-max">{rows}</div>
+  return <div className="flex flex-col w-max">{rows}</div>
 }
 
 export default App

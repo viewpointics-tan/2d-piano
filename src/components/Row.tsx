@@ -17,12 +17,13 @@ const Row = ({
   const style: React.CSSProperties = {
     width: `${rowLength * keyWidth}mm`,
     height: `${keyHeight}mm`,
+    left: `${(rowIndex * keyWidth) / 2}mm`,
   }
   const keys = [...Array(rowLength).keys()].map((_, index) => (
     <Key keyNumber={index} keyHeight={keyHeight} keyWidth={keyWidth} />
   ))
   return (
-    <div className="flex flex-row" style={style}>
+    <div className="flex flex-row relative" style={style}>
       {keys}
     </div>
   )
