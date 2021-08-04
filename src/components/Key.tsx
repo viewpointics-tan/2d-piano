@@ -4,9 +4,15 @@ interface Props {
   keyNumber: number
   keyHeight: number
   keyWidth: number
+  parity: boolean
 }
 
-const Key = ({ keyNumber, keyHeight, keyWidth }: Props): JSX.Element => {
+const Key = ({
+  keyNumber,
+  keyHeight,
+  keyWidth,
+  parity,
+}: Props): JSX.Element => {
   const boxStyle: React.CSSProperties = {
     width: `${keyWidth}mm`,
     height: `${keyHeight}mm`,
@@ -18,7 +24,9 @@ const Key = ({ keyNumber, keyHeight, keyWidth }: Props): JSX.Element => {
   return (
     <div style={boxStyle}>
       <div
-        className="flex-shrink-0 rounded-lg h-full bg-yellow-200 shadow-md"
+        className={`flex-shrink-0 rounded-lg h-full shadow-lg ${
+          parity ? 'bg-white' : 'bg-yellow-200'
+        }`}
         style={keyStyle}
       >
         {keyNumber}
