@@ -1,7 +1,5 @@
 import React from 'react'
 
-function Key(): JSX.Element {
-  return <div />
-}
+const Key = (): JSX.Element => <div>note name</div>
 
 export default Key

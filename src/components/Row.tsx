@@ -1,7 +1,10 @@
 import React from 'react'
 
-function Row(): JSX.Element {
-  return <div />
+interface Props {
+  rowIndex: number
+  rowLength: number
 }
+
+const Row = ({ rowIndex }: Props): JSX.Element => <div>{rowIndex}</div>
 
 export default Row
