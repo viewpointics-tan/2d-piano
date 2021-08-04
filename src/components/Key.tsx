@@ -1,5 +1,21 @@
 import React from 'react'
 
-const Key = (): JSX.Element => <div>note name</div>
+interface Props {
+  keyNumber: number
+  keyHeight: number
+  keyWidth: number
+}
+
+const Key = ({ keyNumber, keyHeight, keyWidth }: Props): JSX.Element => {
+  const style: React.CSSProperties = {
+    width: `${keyWidth}mm`,
+    height: `${keyHeight}mm`,
+  }
+  return (
+    <div className="flex-shrink-0" style={style}>
+      {keyNumber}
+    </div>
+  )
+}
 
 export default Key
