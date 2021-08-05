@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import SoundFont from 'soundfont-player'
 import Row from './components/Row'
 
@@ -9,28 +9,48 @@ const keyWidth = 40
 const deltaX = 2
 const deltaY = 3
 
-const ac = new AudioContext()
+interface Playing {
+  note: number
+  value: Promise<void | SoundFont.Player>
+}
 
 const App = (): JSX.Element => {
-  const playSound = {
-    noteOn: (keyNumber: number) =>
-      SoundFont.instrument(ac, 'acoustic_grand_piano')
-        .then((inst) => inst.play(`${keyNumber}`, ac.currentTime, { gain: 20 }))
-        .catch((err) => {
-          console.log(err)
-        }),
-    noteOff: (instPromise: Promise<void | SoundFont.Player>) => {
-      instPromise
-        .then((player) => {
-          if (typeof player === 'object') {
-            player.stop()
-          }
-        })
-        .catch((err) => {
-          console.log(err)
-        })
-    },
-  }
+  useEffect(() => {
+    const playing: Playing[] = [{}]
+    const ac = new AudioContext()
+    const playSound = {
+      noteOn: (keyNumber: number) =>
+        SoundFont.instrument(ac, 'acoustic_grand_piano')
+          .then((inst) =>
+            inst.play(`${keyNumber}`, ac.currentTime, { gain: 20 })
+          )
+          .catch((err) => {
+            console.log(err)
+          }),
+      noteOff: (instPromise: Promise<void | SoundFont.Player>) => {
+        instPromise
+          .then((player) => {
+            if (typeof player === 'object') {
+              player.stop()
+            }
+          })
+          .catch((err) => {
+            console.log(err)
+          })
+      },
+    }
+
+    document.addEventListener('noteOn', (e) => {
+      const { note } = e.detail
+      playing.push({ note, value: playSound.noteOn(note) })
+    })
+    document.addEventListener('noteOff', (e) => {
+      const { note } = e.detail
+      const index = playing.findIndex((el) => el.note === note)
+      playing[index].value.then((inst) => inst.stop())
+      playing.splice(index, 1)
+    })
+  }, [])
 
   const rows = [...Array(rowNumber).keys()].map((index) => (
     <Row
@@ -43,7 +63,11 @@ const App = (): JSX.Element => {
       deltaY={deltaY}
     />
   ))
-  return <div className="flex flex-col w-max">{rows}</div>
+  return (
+    <div className="flex flex-col w-max" id="app">
+      {rows}
+    </div>
+  )
 }
 
 export default App

@@ -40,9 +40,15 @@ const Key = ({
   const [pianoKeyDown, setPianoKeyDown] = useState(false)
   const onPianoKeyDown = () => {
     setPianoKeyDown(true)
+    document.dispatchEvent(
+      new CustomEvent('noteOn', { detail: { note: keyNumber + 60 } })
+    )
   }
   const onPianoKeyUp = () => {
     setPianoKeyDown(false)
+    document.dispatchEvent(
+      new CustomEvent('noteOff', { detail: { note: keyNumber + 60 } })
+    )
   }
   const colorClassName = () => {
     if (pianoKeyDown) {
