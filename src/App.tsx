@@ -12,11 +12,12 @@ const App = (): JSX.Element => {
   const rows = [...Array(rowNumber).keys()].map((index) => (
     <Row
       rowNumber={rowNumber}
-      rowIndex={index - deltaY}
+      rowIndex={index}
       rowLength={rowLength}
       keyHeight={keyHeight}
       keyWidth={keyWidth}
       deltaX={deltaX}
+      deltaY={deltaY}
     />
   ))
   return <div className="flex flex-col w-max">{rows}</div>
