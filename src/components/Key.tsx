@@ -1,4 +1,5 @@
 import React from 'react'
+import * as math from '../util/math'
 
 interface Props {
   keyNumber: number
@@ -6,6 +7,20 @@ interface Props {
   keyWidth: number
   parity: boolean
 }
+const noteName = [
+  'C',
+  'C♯',
+  'D',
+  'D♯',
+  'E',
+  'F',
+  'F♯',
+  'G',
+  'G♯',
+  'A',
+  'A♯',
+  'B',
+]
 
 const Key = ({
   keyNumber,
@@ -24,12 +39,17 @@ const Key = ({
   return (
     <div style={boxStyle}>
       <div
-        className={`flex-shrink-0 rounded-lg h-full shadow-lg ${
+        className={`flex-shrink-0 rounded-lg h-full shadow-lg flex justify-evenly items-center ${
           parity ? 'bg-white' : 'bg-yellow-200'
         }`}
         style={keyStyle}
       >
-        {keyNumber}
+        <div className="text-2xl font-serif">
+          {keyNumber}
+        </div>
+        <div className="text-3xl font-serif">
+          {noteName[math.mod(keyNumber, 12)]}
+        </div>
       </div>
     </div>
   )
