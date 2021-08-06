@@ -18,9 +18,11 @@ const App = (): JSX.Element => {
   useEffect(() => {
     const playing: Playing[] = [{}]
     const ac = new AudioContext()
+    const instrument = SoundFont.instrument(ac, 'acoustic_grand_piano')
+
     const playSound = {
       noteOn: (keyNumber: number) =>
-        SoundFont.instrument(ac, 'acoustic_grand_piano')
+        instrument
           .then((inst) =>
             inst.play(`${keyNumber}`, ac.currentTime, { gain: 20 })
           )
@@ -47,7 +49,7 @@ const App = (): JSX.Element => {
     document.addEventListener('noteOff', (e) => {
       const { note } = e.detail
       const index = playing.findIndex((el) => el.note === note)
-      playing[index].value.then((inst) => inst.stop())
+      playing[index]?.value.then((inst) => inst?.stop())
       playing.splice(index, 1)
     })
   }, [])
