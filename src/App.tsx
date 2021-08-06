@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import SoundFont from 'soundfont-player'
 import Row from './components/Row'
 
-const rowNumber = 5
+const rowNumber = 7
 const rowLength = 10
 const keyHeight = 20
 const keyWidth = 40
