@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
 import React, { useState } from 'react'
 import * as math from '../util/math'
 
@@ -44,12 +45,16 @@ const Key = ({
       new CustomEvent('noteOn', { detail: { note: keyNumber + 60 } })
     )
   }
-  const onPianoKeyUp = () => {
+  const onPianoKeyUp = (e) => {
     setPianoKeyDown(false)
     document.dispatchEvent(
       new CustomEvent('noteOff', { detail: { note: keyNumber + 60 } })
     )
   }
+  const preventEvent = (e) => {
+    e.preventDefault()
+  }
+
   const colorClassName = () => {
     if (pianoKeyDown) {
       return 'bg-red-300'
@@ -66,11 +71,13 @@ const Key = ({
         className={`flex-shrink-0 rounded-lg h-full shadow-lg flex justify-evenly items-center ${colorClassName()}`}
         style={keyStyle}
         onPointerDown={onPianoKeyDown}
-        onPointerUp={onPianoKeyUp}
-        onPointerOut={onPianoKeyUp}
+        onTouchEnd={onPianoKeyUp}
+        onMouseUp={onPianoKeyUp}
+        onMouseLeave={onPianoKeyUp}
+        onContextMenu={preventEvent}
       >
-        <div className="text-2xl font-serif">{keyNumber}</div>
-        <div className="text-3xl font-serif">
+        <div className="text-2xl font-serif select-none">{keyNumber}</div>
+        <div className="text-3xl font-serif select-none">
           {noteName[math.mod(keyNumber, 12)]}
         </div>
       </div>
