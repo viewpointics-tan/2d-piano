@@ -68,24 +68,17 @@ const Key = ({
   return (
     <div style={boxStyle}>
       <div
-        className={`flex-shrink-0 rounded-lg h-full shadow-lg flex justify-evenly items-center ${colorClassName()}`}
+        className={`flex-shrink-0 rounded-lg h-full shadow-lg flex justify-evenly items-center select-none ${colorClassName()}`}
         style={keyStyle}
+        onContextMenu={preventEvent}
         onPointerDown={onPianoKeyDown}
         onTouchEnd={onPianoKeyUp}
         onMouseUp={onPianoKeyUp}
         onMouseLeave={onPianoKeyUp}
-        onContextMenu={preventEvent}
+        onTouchCancel={onPianoKeyUp}
       >
-        <div
-          className="text-2xl font-serif select-none"
-          onContextMenu={preventEvent}
-        >
-          {keyNumber}
-        </div>
-        <div
-          className="text-3xl font-serif select-none"
-          onContextMenu={preventEvent}
-        >
+        <div className="text-2xl font-serif">{keyNumber}</div>
+        <div className="text-3xl font-serif">
           {noteName[math.mod(keyNumber, 12)]}
         </div>
       </div>

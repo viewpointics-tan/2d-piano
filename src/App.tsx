@@ -11,12 +11,12 @@ const deltaY = 3
 
 interface Playing {
   note: number
-  value: Promise<void | SoundFont.Player>
+  value: Promise<void | SoundFont.Player> | undefined
 }
 
 const App = (): JSX.Element => {
   useEffect(() => {
-    const playing: Playing[] = [{}]
+    const playing: Playing[] = []
     const ac = new AudioContext()
     const instrument = SoundFont.instrument(ac, 'acoustic_grand_piano')
 
@@ -44,13 +44,20 @@ const App = (): JSX.Element => {
 
     document.addEventListener('noteOn', (e) => {
       const { note } = e.detail
-      playing.push({ note, value: playSound.noteOn(note) })
+      const noteOn = { note, value: playSound.noteOn(note) }
+      const index = playing.findIndex((el) => el.note === note)
+      if (index === -1) {
+        playing.push(noteOn)
+      } else {
+        playing.splice(index, 1, noteOn)
+      }
     })
     document.addEventListener('noteOff', (e) => {
       const { note } = e.detail
+      const noteOff = { note, value: undefined }
       const index = playing.findIndex((el) => el.note === note)
-      playing[index]?.value.then((inst) => inst?.stop())
-      playing.splice(index, 1)
+      playing[index].value.then((inst) => inst?.stop())
+      playing.splice(index, 1, noteOff)
     })
   }, [])
 
