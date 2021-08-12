@@ -45,7 +45,7 @@ const Key = ({
       new CustomEvent('noteOn', { detail: { note: keyNumber + 60 } })
     )
   }
-  const onPianoKeyUp = (e) => {
+  const onPianoKeyUp = () => {
     setPianoKeyDown(false)
     document.dispatchEvent(
       new CustomEvent('noteOff', { detail: { note: keyNumber + 60 } })
@@ -76,8 +76,16 @@ const Key = ({
         onMouseLeave={onPianoKeyUp}
         onContextMenu={preventEvent}
       >
-        <div className="text-2xl font-serif select-none">{keyNumber}</div>
-        <div className="text-3xl font-serif select-none">
+        <div
+          className="text-2xl font-serif select-none"
+          onContextMenu={preventEvent}
+        >
+          {keyNumber}
+        </div>
+        <div
+          className="text-3xl font-serif select-none"
+          onContextMenu={preventEvent}
+        >
           {noteName[math.mod(keyNumber, 12)]}
         </div>
       </div>
